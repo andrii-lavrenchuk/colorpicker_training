@@ -48,18 +48,27 @@ function onPaletteContainerClick(e) {
     return;
   }
 
+  removeActiveClassFromCard();
+
+  const swatchEl = e.target;
+  const parentColorCard = swatchEl.closest('.color-card');
+
+  addActiveClasOnCard(parentColorCard);
+  setBodyBgColor(swatchEl.dataset.hex);
+}
+
+function setBodyBgColor(color) {
+  document.body.style.backgroundColor = color;
+}
+
+function removeActiveClassFromCard() {
   const currentActiveCard = document.querySelector('.color-card.is-active');
 
   if (currentActiveCard) {
     currentActiveCard.classList.remove('is-active');
   }
-  const swatchEl = e.target;
-  const parentColorCard = swatchEl.closest('.color-card');
+}
 
-  parentColorCard.classList.add('is-active');
-
-  console.log(e.target.dataset.hex);
-  const bodyColor = swatchEl.dataset.hex;
-
-  document.body.style.backgroundColor = bodyColor;
+function addActiveClasOnCard(card) {
+  card.classList.add('is-active');
 }
